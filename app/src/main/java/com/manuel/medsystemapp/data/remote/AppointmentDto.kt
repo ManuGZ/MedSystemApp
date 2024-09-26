@@ -1,6 +1,7 @@
 package com.manuel.medsystemapp.data.remote
 
 import com.google.gson.annotations.SerializedName
+import com.manuel.medsystemapp.domain.Appointment
 
 data class AppointmentDto(
     @SerializedName("id")
@@ -14,3 +15,5 @@ data class AppointmentDto(
     @SerializedName("reason")
     val description: String,
 )
+
+fun AppointmentDto.toAppointment() = Appointment(appointmentId, doctorId, patientId, appointmentDate, description)
