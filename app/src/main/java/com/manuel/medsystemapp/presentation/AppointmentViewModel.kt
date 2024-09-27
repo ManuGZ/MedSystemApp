@@ -31,4 +31,21 @@ class AppointmentViewModel(private val repository: AppointmentRepository) : View
             }
         }
     }
+
+    fun postAppointment(appointment: Appointment) {
+        viewModelScope.launch {
+            try{
+                val newAppointment = repository.postAppointments(appointment)
+                if (newAppointment is Resource.Success) {
+                    val updatedAppointments = state.value.data?.toMutableList() ?: mutableListOf()
+                    updatedAppointments.add(newAppointment.data!!)
+                    _state.value = UIState(data = updatedAppointments)
+                } else {
+                    _state.value = UIState(message = newAppointment.message ?: "An error occurred.")
+                }
+            } catch (e:Exception){
+                _state.value = UIState(message = e.message ?: "An error occurred.")
+            }
+        }
+    }
 }
