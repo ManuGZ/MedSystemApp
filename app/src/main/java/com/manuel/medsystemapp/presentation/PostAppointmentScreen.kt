@@ -10,6 +10,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -31,10 +32,6 @@ fun PostAppointmentScreen(viewModel: AppointmentViewModel, navController: NavHos
     var date by remember { mutableStateOf("") }
     var reason by remember { mutableStateOf("") }
 
-    var isDoctorIdFocused  by remember { mutableStateOf(false) }
-    var isPatientIdFocused  by remember { mutableStateOf(false) }
-    var isDateIdFocused  by remember { mutableStateOf(false) }
-    var isReasonIdFocused  by remember { mutableStateOf(false) }
 
     Scaffold { paddingValues ->
         Box(
@@ -51,16 +48,10 @@ fun PostAppointmentScreen(viewModel: AppointmentViewModel, navController: NavHos
                 OutlinedTextField(
                     value = doctorId,
                     onValueChange = { doctorId = it },
-                    label = {
-                        Text(
-                            "Doctor ID",
-                            color = if (isDoctorIdFocused) Color.White else Color.Black
-                        )
-                    },
+                    placeholder = { Text("DoctorID")},
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp)
-                        .onFocusChanged { focusState -> isDoctorIdFocused = focusState.isFocused },
+                        .padding(8.dp),
                     colors = TextFieldDefaults.colors(
                         unfocusedContainerColor = Color.White,
                         focusedContainerColor = Color.White
@@ -69,16 +60,10 @@ fun PostAppointmentScreen(viewModel: AppointmentViewModel, navController: NavHos
                 OutlinedTextField(
                     value = patientId,
                     onValueChange = { patientId = it },
-                    label = {
-                        Text(
-                            "Patient ID",
-                            color = if (isPatientIdFocused) Color.White else Color.Black
-                        )
-                    },
+                    label = { Text("PatientID")},
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp)
-                        .onFocusChanged { focusState -> isPatientIdFocused = focusState.isFocused },
+                        .padding(8.dp),
                     colors = TextFieldDefaults.colors(
                         unfocusedContainerColor = Color.White,
                         focusedContainerColor = Color.White
@@ -87,16 +72,10 @@ fun PostAppointmentScreen(viewModel: AppointmentViewModel, navController: NavHos
                 OutlinedTextField(
                     value = date,
                     onValueChange = { date = it },
-                    label = {
-                        Text(
-                            "Date",
-                            color = if (isDateIdFocused) Color.White else Color.Black
-                        )
-                    },
+                    label = { Text("Date")},
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp)
-                        .onFocusChanged { focusState -> isDateIdFocused = focusState.isFocused },
+                        .padding(8.dp),
                     colors = TextFieldDefaults.colors(
                         unfocusedContainerColor = Color.White,
                         focusedContainerColor = Color.White
@@ -105,16 +84,10 @@ fun PostAppointmentScreen(viewModel: AppointmentViewModel, navController: NavHos
                 OutlinedTextField(
                     value = reason,
                     onValueChange = { reason = it },
-                    label = {
-                        Text(
-                            "Reason",
-                            color = if (isReasonIdFocused) Color.White else Color.Black
-                        )
-                    },
+                    label = { Text("Reason")},
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp)
-                        .onFocusChanged { focusState -> isReasonIdFocused = focusState.isFocused },
+                        .padding(8.dp),
                     colors = TextFieldDefaults.colors(
                         unfocusedContainerColor = Color.White,
                         focusedContainerColor = Color.White

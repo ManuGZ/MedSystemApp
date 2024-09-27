@@ -64,7 +64,7 @@ fun AppointmentScreen(viewModel: AppointmentViewModel, navController: NavHostCon
                     }
 
                 }
-            Button(onClick = {
+            Button(modifier = Modifier.padding(top = 40.dp),onClick = {
                 navController.navigate("postAppointment")
             },) {
                 Text( "Create new appointment")
