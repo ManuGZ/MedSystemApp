@@ -136,6 +136,11 @@ fun PostAppointmentScreen(viewModel: AppointmentViewModel, navController: NavHos
                 }) {
                     Text("Create Appointment")
                 }
+                Button(onClick = {
+                    navController.navigate("getAppointments")
+                }) {
+                    Text("Back to Appointments")
+                }
             }
         }
     }

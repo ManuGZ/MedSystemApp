@@ -1,6 +1,7 @@
 package com.manuel.medsystemapp.presentation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,6 +12,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,8 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.manuel.medsystemapp.domain.Appointment
 
 @Composable
 fun AppointmentScreen(viewModel: AppointmentViewModel, navController: NavHostController) {
@@ -31,13 +33,19 @@ fun AppointmentScreen(viewModel: AppointmentViewModel, navController: NavHostCon
                 .fillMaxSize()
                 .background(Color(0xFF2E3F6E))
                 .padding(paddingValues)
+                ,contentAlignment = Alignment.TopCenter
         ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text("APPOINTMENTS", color = Color.White, fontSize = 32.sp, modifier = Modifier.padding(bottom = 10.dp))
+                Text("My next Appointments",color = Color.White, fontSize = 24.sp)
+            }
+
         Column(
             modifier = Modifier.padding(paddingValues),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             state.data?.let { appointments ->
-                LazyColumn {
+                LazyColumn(modifier = Modifier.padding(top = 30.dp)) {
                     itemsIndexed(appointments) { _, appointment ->
                         Card(
                             modifier = Modifier
@@ -52,22 +60,15 @@ fun AppointmentScreen(viewModel: AppointmentViewModel, navController: NavHostCon
                                 Text("Reason: ${appointment.reason}")
                             }
                         }
-
+                    }
                     }
 
-                    }
-                Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Button(onClick = {
-                        navController.navigate("postAppointment")
-                    }) {
-                        Text( "Create new appointment")
-                    }
                 }
-                }
-
+            Button(onClick = {
+                navController.navigate("postAppointment")
+            },) {
+                Text( "Create new appointment")
+            }
             }
             if (state.isLoading) {
                 CircularProgressIndicator()
