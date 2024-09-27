@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.landscapist.glide)
     implementation(libs.room.runtime)
+    implementation(libs.androidx.navigation.compose)
     annotationProcessor(libs.room.compiler)
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
@@ -74,4 +75,5 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
 }
