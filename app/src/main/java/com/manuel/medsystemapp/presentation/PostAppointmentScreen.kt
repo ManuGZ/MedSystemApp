@@ -131,6 +131,7 @@ fun PostAppointmentScreen(viewModel: AppointmentViewModel, navController: NavHos
                         reason = reason
                     )
                     viewModel.postAppointment(newAppointment)
+                    navController.popBackStack()
                 }) {
                     Text("Create Appointment")
                 }
