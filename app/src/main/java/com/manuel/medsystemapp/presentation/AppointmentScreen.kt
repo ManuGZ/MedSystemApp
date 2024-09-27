@@ -52,9 +52,22 @@ fun AppointmentScreen(viewModel: AppointmentViewModel, navController: NavHostCon
                                 Text("Reason: ${appointment.reason}")
                             }
                         }
+
                     }
+
+                    }
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Button(onClick = {
+                        navController.navigate("postAppointment")
+                    }) {
+                        Text( "Create new appointment")
                     }
                 }
+                }
+
             }
             if (state.isLoading) {
                 CircularProgressIndicator()
@@ -62,16 +75,9 @@ fun AppointmentScreen(viewModel: AppointmentViewModel, navController: NavHostCon
             if (state.message.isNotEmpty()) {
                 Text(state.message)
             }
-            Box(
-                modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                Button(onClick = {
-                    navController.navigate("postAppointment")
-                }) {
-                    Text( "Create new appointment")
-                }
-            }
+
         }
+
     }
+
 }
