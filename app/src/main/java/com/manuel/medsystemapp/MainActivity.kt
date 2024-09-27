@@ -1,47 +1,37 @@
-package com.manuel.medsystemapp
+package com.manuel.medsystemapp;
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.manuel.medsystemapp.common.Constants
+import com.manuel.medsystemapp.data.remote.AppointmentService
+import com.manuel.medsystemapp.data.repository.AppointmentRepository
+import com.manuel.medsystemapp.presentation.AppointmentViewModel
+import com.manuel.medsystemapp.presentation.AppointmentScreen
 import com.manuel.medsystemapp.ui.theme.MedSystemAppTheme
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val service = Retrofit
+            .Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(AppointmentService::class.java)
+
+        val viewModel = AppointmentViewModel(AppointmentRepository(service))
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             MedSystemAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                AppointmentScreen(viewModel)
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MedSystemAppTheme {
-        Greeting("Android")
     }
 }
